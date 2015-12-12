@@ -21,4 +21,4 @@ def meanNormalization(inputArray, normTypeChoice):
 
     normalizedArray = (inputArray - columnMeans) / normType[normTypeChoice]
     
-    return normalizedArray
+    return normalizedArray, columnMeans, columnStd
