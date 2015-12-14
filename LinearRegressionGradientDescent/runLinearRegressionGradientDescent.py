@@ -6,8 +6,14 @@ Created on Sat Dec 12 10:29:32 2015
 """
 
 import numpy as np
+import matplotlib.pyplot as plt
 import dataNormalization as dn
 import computeCostMulti as cm
+
+#will need to reload modules if changing
+#dataNormalization or computeCostMulti functions
+reload(dn)
+reload(cm)
 
 print 'Loading data...'
 
@@ -28,12 +34,21 @@ print 'Running gradient descent...'
 
 #set learning rate and number of iterations
 alpha = .01
-num_iters = 10
+num_iters = 400
 
 #initialize theta with zeros
 theta = np.zeros((n,1))
 
 J, theta, J_history = cm.computeCostMulti(X, y, theta, alpha, num_iters)
+
+#plot J at each iteration
+#should be decreasing every time
+x_axis = [q for q in range(num_iters)]
+plt.plot(x_axis, J_history)
+plt.title('Cost vs. Number of iterations')
+plt.xlabel('Number of Iterations')
+plt.ylabel('Cost')
+plt.show()
 
 print 'Final J {}'.format(J)
 print 'Final theta: {}'.format(theta)

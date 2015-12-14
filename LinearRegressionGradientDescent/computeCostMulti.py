@@ -21,11 +21,12 @@ def computeCostMulti(X, y, theta, alpha, num_iters):
     for i in range(num_iters):
         #compute the cost
         #predictedOutput = np.dot(np.transpose(theta), X)
-        predictedOutput = np.dot(X, theta)
+        predictedOutput = np.dot(X, theta)      
         delta = predictedOutput - y
-        squaredDelta = (delta) ** 2
+        squaredDelta = (delta) ** 2     
         sumSquaredDiff = sum(sum(squaredDelta))
-        J = (1 / (2 *m)) * sumSquaredDiff
+        #J = ((1 / (2 * m)) * sumSquaredDiff)
+        J = (sumSquaredDiff / (2*m))
     
         #update theta
         theta -= ((alpha / m) * (np.dot(np.transpose(X), delta)))
