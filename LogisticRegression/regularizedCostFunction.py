@@ -36,3 +36,8 @@ def regularizedCostFunction(theta, X, y, lambda_):
     #gradient
     delta = prediction - y
     
+    lambdaTerm = np.vstack(np.array((([0],))), ((lambda_ / m) * theta[1:]))
+    
+    gradient = ((1 / m) * np.dot((np.transpose(X), delta))) + lambdaTerm
+    
+    return J, gradient
