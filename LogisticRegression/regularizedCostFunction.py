@@ -24,9 +24,9 @@ def regularizedCostFunction(theta, X, y, lambda_):
     #does there need to be a -1 here?
     predictionCost = np.hstack([np.log(prediction), np.log(1-prediction)])
     
-    yCost = predictionCost * yMatrix
+    yCost = -1 * (predictionCost * yMatrix)
     
-    J = sum(sum(yCost))
+    J = (sum(sum(yCost))) / m
     
     regTerm = (lambda_ / (2 * m)) * (sum(sum(theta ** 2)))
     
@@ -36,8 +36,11 @@ def regularizedCostFunction(theta, X, y, lambda_):
     #gradient
     delta = prediction - y
     
-    lambdaTerm = np.vstack(np.array((([0],))), ((lambda_ / m) * theta[1:]))
+    #lambdaTermReg = ((lambda_ / m) * theta[1:])
     
-    gradient = ((1 / m) * np.dot((np.transpose(X), delta))) + lambdaTerm
+    #lambdaTerm = np.append(np.zeros((1,1)), ((lambda_ / m) * theta[1:])), axis = 0)
+    lambdaTerm = np.append(np.zeros((1,1)), ((lambda_ / m) * theta[1:]), axis =0)    
+    print np.shape(lambdaTerm)
+    gradient = ((1 / m) * np.dot(np.transpose(X), delta)) + lambdaTerm
     
     return J, gradient
